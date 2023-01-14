@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:11.5
+    restart: always
+    container_name: ${DB_CONTAINER_NAME}
+    environment:
+      POSTGRES_USER: ${TYPEORM_USERNAME}
+      POSTGRES_PASSWORD: ${TYPEORM_PASSWORD}
+      POSTGRES_DB: ${TYPEORM_DATABASE}
+    ports:
+      - '${DB_LOCAL_PORT}:${DB_CONTAINER_PORT}'
+    volumes:
+      - ./.postgres:/var/lib/postgresql/data2
+    env_file:
+      - .env
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+     - PGADMIN_DEFAULT_EMAIL=auction_db@gmail.com
+     - PGADMIN_DEFAULT_PASSWORD=rootroot
+    ports:
+      - "5050:80"
+
