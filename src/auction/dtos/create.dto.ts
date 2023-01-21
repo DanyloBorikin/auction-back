@@ -11,14 +11,12 @@ export class CreateAuctionDto {
   description: string;
 
   @ApiProperty({ example: 1000000, description: 'Start price' })
-  @IsInt()
-  @Min(10)
-  startPrice: number;
+  @IsString()
+  startPrice: string;
 
   @ApiProperty({ example: 1000, description: 'Bid step' })
-  @IsInt()
-  @Min(1)
-  step: number;
+  @IsString()
+  step: string;
 
   @ApiProperty({ example: '22.11.2023 12:00', description: 'Start date of the auction' })
   @IsString()
