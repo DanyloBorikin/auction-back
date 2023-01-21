@@ -12,6 +12,7 @@ import { ValidationModule } from './validation/validation.module';
 import { PasswordModule } from './password/password.module';
 import { RegistrationModule } from './registration/registration.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
+import { AuctionModule } from './auction/auction.module';
 
 const {
   TYPEORM_CONNECTION,
@@ -59,6 +60,7 @@ console.log('TYPEORM_PORT', TYPEORM_PORT)
     ValidationModule,
     PasswordModule,
     RegistrationModule,
+    AuctionModule,
   ],
   controllers: [AppController],
 })

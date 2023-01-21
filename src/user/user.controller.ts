@@ -4,7 +4,10 @@ import { Response, Request } from 'express';
 import { UserService } from './user.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { JwtService } from '@nestjs/jwt';
+import { UserDto } from './dtos/user.dto';
+import {ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
 
+@ApiTags('User')
 @Controller('user')
 export class UserController {
   constructor(
@@ -12,6 +15,8 @@ export class UserController {
     private readonly jwtService: JwtService,
   ) {}
 
+  @ApiOperation({ summary: 'Get user by id' })
+  @ApiResponse({ status: 200, type: [UserDto] })
   @UseGuards(JwtAuthGuard)
   @Get()
   async find(@Req() req: Request, @Res() res: Response) {
@@ -21,6 +26,8 @@ export class UserController {
     return res.status(200).json(user);
   }
 
+  @ApiOperation({ summary: 'Get current user by token' })
+  @ApiResponse({ status: 200, type: UserDto })
   @UseGuards(JwtAuthGuard)
   @Get('/me')
   async getUserByToken(@Req() req: Request, @Res() res: Response) {

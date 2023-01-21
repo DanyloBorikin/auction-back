@@ -101,6 +101,9 @@ $ npm run dev
 $ npm run start:prod
 ```
 
+## API documentation
+[Documentation](http://localhost:3003/api/docs)
+
 ## Test
 
 ```bash

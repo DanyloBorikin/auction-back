@@ -7,6 +7,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
+import { Auction } from "../auction/auction.entity";
 
 @Entity()
 export class User {
@@ -31,4 +32,7 @@ export class User {
 
   @UpdateDateColumn({ type: 'timestamptz' })
   updatedAt: string;
+
+  @OneToMany(() => Auction, (Auction) => Auction.owner)
+  auctions: Auction[];
 }
