@@ -35,6 +35,12 @@ export class Auction {
     @Column({ type: 'bool', default: false })
     isFinished: boolean;
 
+    @Column({ type: 'varchar', default: null, nullable: true })
+    images: string[];
+
+    @Column({ type: 'varchar', default: null, nullable: true })
+    video: string;
+
     @Column({ type: 'bool', default: false })
     isDeleted: boolean;
 

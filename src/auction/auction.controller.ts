@@ -50,7 +50,7 @@ export class AuctionController {
   @UseGuards(JwtAuthGuard)
   @Post()
   @UseInterceptors(
-    FileFieldsInterceptor([{ name: 'image' }, { name: 'video' }]),
+    FileFieldsInterceptor([{ name: 'images' }, { name: 'video' }]),
   )
   async create(
     @Req() req: Request,
@@ -82,12 +82,16 @@ export class AuctionController {
       });
     }
 
-    const imageName = this.filesService.createFile(files.image, 'image');
-    const videoName = this.filesService.createFile(files.video, 'video');
+    console.log('files.video', files.video[0])
+    console.log('files.images', files.images)
+    const videoName = this.filesService.createFile(files.video[0], 'video');
+    const imageNames = files.images.map(image => this.filesService.createFile(image, 'images'));
+    console.log('videoName', videoName)
+    console.log('imageNames', imageNames)
 
     await this.auctionService.create(req, {
       ...createDto,
-      image: imageName,
+      images: imageNames,
       video: videoName,
     });
 

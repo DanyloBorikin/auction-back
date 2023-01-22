@@ -5,9 +5,8 @@ import { v4 } from 'uuid';
 
 @Injectable()
 export class FilesService {
-  createFile(files, field: string): string {
+  createFile(file, field: string): string {
     try {
-      const file = files[0];
       const format = file.mimetype.split('/')[1];
       const fileName = `${v4()}.${format}`;
       const filePath = path.resolve(__dirname, '..', 'static');
@@ -20,6 +19,7 @@ export class FilesService {
 
       return fileName;
     } catch (e) {
+      console.log(e)
       throw new HttpException(
         {
           message: 'File upload error',
