@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
 import { Auction } from "../auction/auction.entity";
+import {Bid} from "../bids/bids.entity";
 
 @Entity()
 export class User {
@@ -35,4 +36,7 @@ export class User {
 
   @OneToMany(() => Auction, (Auction) => Auction.owner)
   auctions: Auction[];
+
+  @OneToMany(() => Bid, (Bid) => Bid.owner)
+  bids: Bid[];
 }

@@ -5,9 +5,11 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     ManyToOne,
+    OneToMany,
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
 import { User } from '../user/user.entity';
+import { Bid } from '../bids/bids.entity';
 
 @Entity()
 export class Auction {
@@ -35,6 +37,9 @@ export class Auction {
     @Column({ type: 'bool', default: false })
     isFinished: boolean;
 
+    @Column({ type: 'bool', default: false })
+    isActive: boolean;
+
     @Column({ type: 'varchar', default: null, nullable: true })
     images: string[];
 
@@ -52,4 +57,7 @@ export class Auction {
 
     @ManyToOne(() => User, (User) => User.auctions)
     owner: User;
+
+    @OneToMany(() => Bid, (Bid) => Bid.owner)
+    bids: Bid[];
 }

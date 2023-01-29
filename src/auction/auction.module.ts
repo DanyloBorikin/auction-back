@@ -15,6 +15,7 @@ import { UserModule } from "../user/user.module";
     UserModule,
   ],
   controllers: [AuctionController],
-  providers: [AuctionService]
+  providers: [AuctionService],
+  exports: [AuctionService],
 })
 export class AuctionModule {}

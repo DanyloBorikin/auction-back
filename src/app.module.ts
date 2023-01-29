@@ -13,6 +13,7 @@ import { PasswordModule } from './password/password.module';
 import { RegistrationModule } from './registration/registration.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { AuctionModule } from './auction/auction.module';
+import { BidsModule } from './bids/bids.module';
 
 const {
   TYPEORM_CONNECTION,
@@ -40,7 +41,6 @@ console.log('TYPEORM_PORT', TYPEORM_PORT)
       database: TYPEORM_DATABASE,
       entities: [path.join(__dirname, TYPEORM_ENTITIES_PATH)],
       synchronize: TYPEORM_SYNCHRONIZE === 'true' || false,
-      // synchronize: true,
       migrations: [TYPEORM_MIGRATIONS],
       migrationsTableName: 'migrations',
     }),
@@ -61,6 +61,7 @@ console.log('TYPEORM_PORT', TYPEORM_PORT)
     PasswordModule,
     RegistrationModule,
     AuctionModule,
+    BidsModule,
   ],
   controllers: [AppController],
 })

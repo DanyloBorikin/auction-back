@@ -82,12 +82,8 @@ export class AuctionController {
       });
     }
 
-    console.log('files.video', files.video[0])
-    console.log('files.images', files.images)
     const videoName = this.filesService.createFile(files.video[0], 'video');
     const imageNames = files.images.map(image => this.filesService.createFile(image, 'images'));
-    console.log('videoName', videoName)
-    console.log('imageNames', imageNames)
 
     await this.auctionService.create(req, {
       ...createDto,

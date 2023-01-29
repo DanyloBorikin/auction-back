@@ -28,7 +28,7 @@ export class AuctionService {
         ...where,
         isDeleted: false,
       },
-      relations: ['owner'],
+      relations: ['owner', 'bids'],
     });
   }
 
