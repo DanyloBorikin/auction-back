@@ -32,12 +32,39 @@ export class AuctionService {
     });
   }
 
-  findAll(): Promise<Auction[]> {
+  // findAll(query): Promise<Auction[]> {
+  //
+  //   const pagination
+  //   return this.auction.find({
+  //     where: { isDeleted: false },
+  //     relations: ['owner'],
+  //   });
+  // }
+
+// TODO: Add pagination interface and interface for res with pagination
+  async findAll(
+    options,
+  ) {
     // TODO send only id and username owner properties
-    return this.auction.find({
+    const { page, limit } = options;
+    const [data, total] = await this.auction.findAndCount({
       where: { isDeleted: false },
       relations: ['owner'],
+      take: limit,
+      skip: (page - 1) * limit,
     });
+
+    const pagination = {
+      total: total,
+      pages: Math.ceil(total / limit) || 1,
+      currentPage: page,
+      limit: limit,
+    }
+
+    return {
+      data,
+      pagination,
+    };
   }
 }
 

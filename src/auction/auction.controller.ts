@@ -34,7 +34,12 @@ export class AuctionController {
   @UseGuards(JwtAuthGuard)
   @Get()
   async findAll(@Req() req: Request, @Res() res: Response) {
-    return res.status(200).json(await this.auctionService.findAll());
+    const query = {
+      page: req.query?.page && Number(req.query?.page) || 1,
+      limit: req.query?.limit && Number(req.query?.limit) || 10,
+    }
+
+    return res.status(200).json(await this.auctionService.findAll(query));
   }
 
   @ApiOperation({ summary: 'Get auction by id' })
@@ -91,12 +96,9 @@ export class AuctionController {
       video: videoName,
     });
 
-    const auctionsList = await this.auctionService.findAll();
-
     return res.status(200).json({
       status: 'success',
-      message: 'Room created',
-      auctions: auctionsList,
+      message: 'Auction has benn created successful',
     });
   }
 }
